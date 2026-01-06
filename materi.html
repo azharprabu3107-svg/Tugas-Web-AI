@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi Website - Ruang AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Gunakan CSS yang sama dengan index.html untuk konsistensi */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #1d4ed8;
+            --secondary: #8b5cf6;
+            --accent: #10b981;
+            --accent-dark: #059669;
+            --dark: #000000;
+            --light: #f0f8ff;
+            --gray: #64748b;
+            --light-gray: #e8ebe6;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background-color: var(--light-gray);
+        }
+
+        /* Header dan Navigasi */
+        header {
+            background-color: black;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--light-gray);
+            text-decoration: none;
+        }
+        
+        .logo i {
+            font-size: 1.8rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        /* Hero Section untuk Materi */
+        .hero {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            text-align: left;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 5px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive untuk mobile */
+        @media (max-width: 768px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+            }
+            
+            .hero-image {
+                order: -1;
+                margin-bottom: 1rem;
+            }
+            
+            .hero-image img {
+                max-width: 80%;
+            }
+            
+            .hero-text h1 {
+                font-size: 2rem;
+                flex-direction: column;
+            }
+        }
+        /* Card untuk Materi */
+        .materi-card {
+            background-color: lightgray;
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2.5rem;
+            transition: var(--transition);
+        }
+        
+        .materi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .materi-card h2 {
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 3px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .materi-card h3 {
+            color: var(--dark);
+            margin: 1.5rem 0 1rem;
+        }
+        
+        /* Tabel Elemen HTML */
+        .element-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background-color: whitesmoke;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .element-table th {
+            background-color: var(--light-gray);
+            color: black;
+            padding: 1rem;
+            text-align: left;
+        }
+        
+        .element-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .element-table tr:hover {
+            background-color: #f0f9ff;
+        }
+        
+        .element-table td:first-child {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        /* Contoh Kode */
+        .code-example {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .code-example code {
+            display: block;
+            line-height: 1.6;
+        }
+        
+        .code-example .comment {
+            color: #94a3b8;
+        }
+        
+        .code-example .tag {
+            color: #7dd3fc;
+        }
+        
+        .code-example .attr {
+            color: #fde68a;
+        }
+        
+        .code-example .value {
+            color: #86efac;
+        }
+        
+        /* Grid untuk Contoh Visual */
+        .visual-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .visual-item {
+            background-color: whitesmoke;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--light-gray);
+            text-align: center;
+        }
+        
+        .visual-item i {
+            font-size: 3rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        /* Flexibel image styles */
+            .flex-image {
+                max-width: 100%;
+                height: auto;
+                border-radius: var(--radius);
+                box-shadow: var(--shadow);
+            }
+
+            .image-left {
+                float: left;
+                margin: 0 1.5rem 1rem 0;
+                max-width: 50%;
+            }
+
+            .image-right {
+                float: right;
+                margin: 0 0 1rem 1.5rem;
+                max-width: 50%;
+            }
+
+            .image-center {
+                display: block;
+                margin: 1.5rem auto;
+                max-width:50%;
+            }
+
+            .image-responsive {
+                width: 100%;
+                height: auto;
+            }
+
+            .image-container {
+                position: relative;
+                margin: 1.5rem 0;
+            }
+
+            .image-caption {
+                text-align: center;
+                font-style: italic;
+                margin-top: 0.5rem;
+                color: var(--gray);
+                font-size: 0.9rem;
+            }
+
+            /* Clearfix untuk float */
+            .clearfix::after {
+                content: "";
+                clear: both;
+                display: table;
+            }
+
+            /* Media queries untuk responsif */
+            @media (max-width: 768px) {
+                .image-left,
+                .image-right {
+                    float: none;
+                    display: block;
+                    margin: 1.5rem auto;
+                    max-width: 100%;
+                }
+            }
+
+        /* ============================================
+           PENGENALAN DASAR CSS UNTUK WEBSITE INI
+           ============================================ */
+        .css-intro {
+            background-color: #f8fafc;
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 2px dashed var(--primary);
+        }
+        
+        .css-demo {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .css-box {
+            flex: 1;
+            min-width: 200px;
+            height: 150px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        /* CSS Selector Cards */
+        .selector-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .selector-card {
+            background-color: white;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--accent);
+            transition: var(--transition);
+        }
+        
+        .selector-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .selector-card h4 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .selector-card code {
+            background-color: #f1f5f9;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: monospace;
+            color: var(--primary-dark);
+        }
+
+
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .element-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .visual-grid, .selector-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Animasi */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .materi-card {
+            animation: fadeIn 0.5s ease;
+        }
+        
+        /* Highlight untuk poin penting */
+        .highlight {
+            background-color: #fef7cd;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            color: #b45309;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header dan Navigasi -->
+    <header>
+        <div class="container header-content">
+            <a href="TugasWeb1.html" class="logo">
+                <img src="logo.png" width="100" height="60" />
+                <span>Ruang AI</span>
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="TugasWeb1.html">Beranda</a></li>
+                    <li><a href="materi.html" class="active">Materi Website</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Materi Website HTML & CSS</h1>
+                    <p>Analisis elemen HTML dan CSS yang digunakan dalam website <b>"Ruang AI"</b></p>
+                </div>
+                <div class="hero-image">
+                    <img src="headmat.jpg" alt="Ilustrasi Materi Website" width="400" height="300">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Konten Utama -->
+    <div class="container">
+        <main>
+            <!-- Bagian 1: Elemen Semantik HTML -->
+            <article class="materi-card">
+                <h2><i class="fas fa-cubes"></i> Elemen Semantik HTML</h2>
+                <p>Website "Ruang AI" menggunakan elemen semantik HTML5 untuk struktur yang lebih bermakna dan aksesibel.</p>
+                <p>Dengan menggunakan elemen Semantik dapat membantu mesin pencari dan screen reader untuk memahami struktur dan konten dari halaman web dengan maksimal. Berikut elemen-elemen yang digunakan:</p>
+
+                <div class="clearfix">
+                    <img src="semantic-tags.png" alt="ilustrasi semantic" class="flex-image image-center">
+                
+                <table class="element-table">
+                    <thead>
+                        <tr>
+                            <th>Elemen HTML</th>
+                            <th>Fungsi</th>
+                            <th>Contoh Penggunaan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>&lt;header&gt;</td>
+                            <td>Bagian atas website atau kepala kop dari web (logo, navigasi)</td>
+                            <td>Header dengan logo dan menu navigasi</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;nav&gt;</td>
+                            <td>Navigasi utama website</td>
+                            <td>Menu untuk berpindah antar bagian</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;main&gt;</td>
+                            <td>Konten utama website</td>
+                            <td>Seluruh konten edukasi tentang AI</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;section&gt;</td>
+                            <td>Pengelompokan konten atau membuat bagian artikel</td>
+                            <td>Bagian Hero, Dasar AI, Video AI</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;article&gt;</td>
+                            <td>Konten independen yang utuh</td>
+                            <td>Penjelasan tentang dasar-dasar AI</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;aside&gt;</td>
+                            <td>Konten sampingan/tambahan pada bagian samping</td>
+                            <td>Sidebar dengan fakta menarik AI</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;footer&gt;</td>
+                            <td>Bagian bawah website</td>
+                            <td>Informasi hak cipta dan link</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;figure&gt; & &lt;figcaption&gt;</td>
+                            <td>Gambar dengan keterangan</td>
+                            <td>Ilustrasi AI dengan penjelasan</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>Contoh Kode Struktur Semantik:</h3>
+                <div class="code-example">
+                    <code>
+                        <span class="comment">&lt;!-- Struktur Dasar Website --&gt;</span><br>
+                        <span class="tag">&lt;header&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;nav&gt;</span>...<span class="tag">&lt;/nav&gt;</span><br>
+                        <span class="tag">&lt;/header&gt;</span><br><br>
+                        
+                        <span class="tag">&lt;main&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;article</span> <span class="attr">id=</span><span class="value">"basics"</span><span class="tag">&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h2&gt;</span>Dasar-dasar AI<span class="tag">&lt;/h2&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;p&gt;</span>Penjelasan tentang AI...<span class="tag">&lt;/p&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;/article&gt;</span><br>
+                        <span class="tag">&lt;/main&gt;</span><br><br>
+                        
+                        <span class="tag">&lt;footer&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;p&gt;</span>Hak Cipta © 2025<span class="tag">&lt;/p&gt;</span><br>
+                        <span class="tag">&lt;/footer&gt;</span>
+                    </code>
+                </div>
+            </article>
+
+            <!-- Bagian 2: Elemen Multimedia HTML -->
+            <article class="materi-card">
+                <h2><i class="fas fa-photo-video"></i> Elemen Multimedia HTML</h2>
+                <p>Selain menampilkan gambar statis atau diam, HTML juga dapat menampilkan gambar bergerak dan juga bersuara alias video. Website ini menggunakan berbagai elemen multimedia untuk menyampaikan konten edukasi mengenai Chatbot AI:</p>
+                
+                <div class="visual-grid">
+                    <div class="visual-item">
+                        <i class="fas fa-video"></i>
+                        <h3>Elemen &lt;video&gt;</h3>
+                        <p>Menampilkan video penjelasan tentang AI dengan kontrol play, pause, dan volume. Untuk menampilkan video pada HTML dapat menggunakan tag <code> &lt;video&gt;</code>, tag ini berisi sumber video yang ingin di tampilkan.</p>
+                    </div>
+                    
+                    <div class="visual-item">
+                        <i class="fas fa-microphone-alt"></i>
+                        <h3>Elemen &lt;audio&gt;</h3>
+                        <p>Menampilkan konten audio seperti podcast atau penjelasan tentang AI. Bukan hanya video saja, HTML juga dapat memutar suara atau audio menggunakan tag <code>&lt;audio&gt;</code></p>
+                    </div>
+                    
+                    <div class="visual-item">
+                        <i class="fas fa-image"></i>
+                        <h3>Elemen &lt;img&gt;</h3>
+                        <p>Menampilkan gambar ilustrasi AI, diagram neural network, dan foto profil agar website yang dibuat tidak terkesan membosankan</p>
+                    </div>
+                    
+                    <div class="visual-item">
+                        <i class="fas fa-closed-captioning"></i>
+                        <h3>Elemen &lt;track&gt;</h3>
+                        <p>Menambahkan subtitle pada video untuk aksesibilitas</p>
+                    </div>
+                </div>
+                
+                <h3>Contoh Kode Multimedia:</h3>
+                <div class="code-example">
+                    <code>
+                        <span class="comment">&lt;!-- Video dengan kontrol dan subtitle --&gt;</span><br>
+                        <span class="tag">&lt;video</span> <span class="attr">controls</span> <span class="attr">poster=</span><span class="value">"thumbnail.jpg"</span><span class="tag">&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;source</span> <span class="attr">src=</span><span class="value">"videochatbot.mp4"</span> <span class="attr">type=</span><span class="value">"video/mp4"</span><span class="tag">&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;track</span> <span class="attr">src=</span><span class="value">"subtitles-id.vtt"</span> <span class="attr">kind=</span><span class="value">"subtitles"</span> <span class="attr">srclang=</span><span class="value">"id"</span> <span class="attr">label=</span><span class="value">"Indonesia"</span><span class="tag">&gt;</span><br>
+                        &nbsp;&nbsp;Browser Anda tidak mendukung elemen video.<br>
+                        <span class="tag">&lt;/video&gt;</span><br><br>
+                        
+                        <span class="comment">&lt;!-- Audio player --&gt;</span><br>
+                        <span class="tag">&lt;audio</span> <span class="attr">controls</span><span class="tag">&gt;</span><br>
+                        &nbsp;&nbsp;<span class="tag">&lt;source</span> <span class="attr">src=</span><span class="value">"podcastchatbot.mp3"</span> <span class="attr">type=</span><span class="value">"audio/mpeg"</span><span class="tag">&gt;</span><br>
+                        <span class="tag">&lt;/audio&gt;</span>
+                    </code>
+                </div>
+            </article>
+
+                <!-- bagian 3: Pengenalan CSS -->
+                <article id="css" class="materi-card">
+                    <h2><i class="fas fa-paint-brush"></i> CSS: Mendesain Website Ruang AI</h2>
+                    <p>CSS (Cascading Style Sheets) adalah bahasa pemrograman berbasis aturan yang dikembangkan oleh World Wide Web Consortium (W3C) pada tahun 1996. Secara teknik CSS bukanlah elemen wajib tetapi halaman web akan kosong tanpa gaya yang modern sehingga CSS berfungsi untuk mendesain tampilan website.
+                    <p>Cara kerja CSS menggunakan bahasa Inggris berbasis syntax yang dilengkap dengan <i>rule</i>. Kemudian bagaimana cara untuk men-style paragraf? CSS memiliki struktur syntax yang sederhana. Struktur tersebut memiliki <i>selector dan declaration block</i>. Sehingga pilih elemen yang ingin di style, kemudian deklarasikan elemen tersebut. Berikut dasar-dasar CSS yang digunakan dalam website ini.</p>
+
+                    <div class="clearfix">
+                    <img src="css.jpg" alt="ilustasi code" class="flex-image image-center">
+                    
+                    <div class="css-intro">
+                        <h3>Struktur Dasar CSS:</h3>
+                        <div style="background-color: #1e293b; color: whitesmoke; padding: 1.5rem; border-radius: var(--radius); margin: 1.5rem 0;">
+                            <code style="color: #e2e8f0;">
+                                css-demo {<br>
+                                &nbsp;&nbsp;color: black;<br>
+                                &nbsp;&nbsp;font-weight: bold;<br>
+                                &nbsp;&nbsp;font-size: 15px;<br>
+                                &nbsp;&nbsp;text-align: center;<br>
+                                }
+                            </code>
+                        </div>
+                        <p>Contoh diatas menyatakan, semua elemen <b>css-demo</b> akan ditandai dengan warna hitam, huruf tebal / bold, ukuran font 15px dan tata letak atau posisinya ditengah (align-center).</p>
+                        
+                        <div class="css-demo">
+                            <div class="css-box" style="background: linear-gradient(135deg, #3b82f6, #8b5cf6);">
+                                <div>Gradients</div>
+                            </div>
+                            <div class="css-box" style="background-color: white; border: 3px solid #10b981; color: #1e293b;">
+                                <div>Borders</div>
+                            </div>
+                            <div class="css-box" style="background-color: #f59e0b; box-shadow: 0 10px 20px rgba(245, 158, 11, 0.3);">
+                                <div>Shadows</div>
+                            </div>
+                            <div class="css-box" style="background-color: #ef4444; transform: rotate(-5deg);">
+                                <div>Transforms</div>
+                            </div>
+                        </div>
+                        
+                        <h3>Responsive Design Website:</h3>
+                        <p>Website ini menggunakan media queries untuk tampilan responsif di berbagai perangkat:</p>
+                        
+                        <div style="background-color: #f8fafc; padding: 1.5rem; border-radius: var(--radius); margin: 1.5rem 0;">
+                            <code>
+                                @media (max-width: 768px) {<br>
+                                &nbsp;&nbsp;.hero h1 { font-size: 2.2rem; }<br>
+                                &nbsp;&nbsp;nav ul { flex-direction: column; }<br>
+                                &nbsp;&nbsp;.project-grid { grid-template-columns: 1fr; }<br>
+                                }
+                            </code>
+                        </div>
+                    </div>
+                </article>
+
+            <!-- Bagian 4: CSS dan Styling -->
+            <article class="materi-card">
+                <h2><i class="fas fa-paint-brush"></i> CSS dan Styling Website</h2>
+                <p>CSS (Cascading Style Sheets) adalah teknologi yang digunakan untuk menghias atau memperindah halaman website yang dibuat dengan HTML. Dengan CSS website yang dibuat tidak akan membosankan. Website menggunakan CSS modern untuk desain yang responsif dan menarik:</p>
+                
+                <h3>5 Macam Selektor CSS yang Digunakan pada Website "Ruang AI":</h3>
+                <div class="selector-cards">
+                    <div class="selector-card">
+                        <h4>1. Selektor Universal</h4>
+                        <code>* { margin: 0; padding: 0; }</code>
+                        <p>Reset semua margin dan padding</p>
+                    </div>
+                    
+                    <div class="selector-card">
+                        <h4>2. Selektor Elemen</h4>
+                        <code>body { font-family: 'Segoe UI'; }</code>
+                        <p>Menerapkan style ke elemen body</p>
+                    </div>
+                    
+                    <div class="selector-card">
+                        <h4>3. Selektor Class</h4>
+                        <code>.content-card { background: white; }</code>
+                        <p>Menerapkan style ke elemen dengan class tertentu</p>
+                    </div>
+                    
+                    <div class="selector-card">
+                        <h4>4. Selektor ID</h4>
+                        <code>#basics { animation: fadeIn; }</code>
+                        <p>Menerapkan style ke elemen dengan ID tertentu</p>
+                    </div>
+                    
+                    <div class="selector-card">
+                        <h4>5. Selektor Atribut</h4>
+                        <code>[data-type] { border: 1px solid; }</code>
+                        <p>Menerapkan style berdasarkan atribut</p>
+                    </div>
+                </div>
+                
+                <h3>Fitur CSS Modern yang Digunakan:</h3>
+                <ul style="padding-left: 1.5rem; margin: 1.5rem 0;">
+                    <li><span class="highlight">CSS Grid</span> untuk tata letak dua dimensi melalui kolom dan baris pada layout utama (main dan sidebar)</li>
+                    <li><span class="highlight">Flexbox</span> untuk mengatur layout elemen secara fleksibel dalam container pada navigasi dan komponen kecil</li>
+                    <li><span class="highlight">CSS Variables</span> menyimpan dan menggunakan kembali nilai properti CSS untuk konsistensi warna dan ukuran</li>
+                    <li><span class="highlight">Media Queries</span> untuk membuat desain web responsif</li>
+                    <li><span class="highlight">Transisi dan Animasi</span> untuk menciptakan interaktivitas perubahan visual yang halus dan terkontrol</li>
+                    <li><span class="highlight">Box-shadow</span> untuk efek kedalaman atau bayangan pada elemen HTML</li>
+                    <li><span class="highlight">Border-radius</span> untuk sudut melengkung</li>
+                    <li><span class="highlight">Gradients</span> menciptakan transisi warna yang mulus </li>
+                </ul>
+                
+                <h3>Contoh Kode CSS Grid:</h3>
+                <div class="code-example">
+                    <code>
+                        <span class="comment">/* Layout utama dengan Grid */</span><br>
+                        <span class="tag">main</span> {<br>
+                        &nbsp;&nbsp;<span class="attr">display</span>: <span class="value">grid</span>;<br>
+                        &nbsp;&nbsp;<span class="attr">grid-template-columns</span>: <span class="value">1fr 300px</span>;<br>
+                        &nbsp;&nbsp;<span class="attr">gap</span>: <span class="value">3rem</span>;<br>
+                        &nbsp;&nbsp;<span class="attr">margin-bottom</span>: <span class="value">4rem</span>;<br>
+                        }<br><br>
+                        
+                        <span class="comment">/* Responsive design untuk mobile */</span><br>
+                        <span class="tag">@media</span> (<span class="attr">max-width</span>: <span class="value">992px</span>) {<br>
+                        &nbsp;&nbsp;<span class="tag">main</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="attr">grid-template-columns</span>: <span class="value">1fr</span>;<br>
+                        &nbsp;&nbsp;}<br>
+                        }
+                    </code>
+                </div>
+                <h3>Bermain dengan Dasar HTML dan CSS</h3>
+                <p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="PwzZwOv" data-pen-title="Untitled" data-user="Lambadala" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+      <span>See the Pen <a href="https://codepen.io/Lambadala/pen/PwzZwOv">
+  Untitled</a> by Lambadala (<a href="https://codepen.io/Lambadala">@Lambadala</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+      </p>
+      <script async src="https://public.codepenassets.com/embed/index.js"></script>
+            </article>
+
+
+            <!-- Bagian 4: Komponen Website -->
+            <article class="materi-card">
+                <h2><i class="fas fa-puzzle-piece"></i> Komponen Website yang Digunakan</h2>
+                <p>Berikut komponen-komponen utama yang digunakan untuk membentuk website "Ruang AI":</p>
+                
+                <table class="element-table">
+                    <thead>
+                        <tr>
+                            <th>Komponen</th>
+                            <th>Elemen HTML</th>
+                            <th>CSS yang Digunakan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Header/Navigasi</td>
+                            <td>&lt;header&gt;, &lt;nav&gt;, &lt;ul&gt;, &lt;li&gt;, &lt;a&gt;</td>
+                            <td>Flexbox, position: sticky, box-shadow, transition</td>
+                        </tr>
+                        <tr>
+                            <td>Hero Section</td>
+                            <td>&lt;section&gt;, &lt;h1&gt;, &lt;p&gt;, &lt;a&gt; (button)</td>
+                            <td>Gradient background, padding, text-align, button styling</td>
+                        </tr>
+                        <tr>
+                            <td>Kartu Konten</td>
+                            <td>&lt;article&gt;, &lt;div&gt;, &lt;h2&gt;, &lt;p&gt;</td>
+                            <td>Box-shadow, border-radius, padding, hover effects</td>
+                        </tr>
+                        <tr>
+                            <td>Sidebar</td>
+                            <td>&lt;aside&gt;, &lt;div&gt;, &lt;h3&gt;, &lt;p&gt;</td>
+                            <td>Position: sticky, background, border-left</td>
+                        </tr>
+                        <tr>
+                            <td>Footer</td>
+                            <td>&lt;footer&gt;, &lt;div&gt;, &lt;p&gt;, &lt;a&gt;</td>
+                            <td>Background color, grid layout, border-top</td>
+                        </tr>
+                        <tr>
+                            <td>Form Chatbot</td>
+                            <td>&lt;input&gt;, &lt;button&gt;, &lt;div&gt; untuk messages</td>
+                            <td>Flexbox, border-radius, background colors</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+
+            <!-- Bagian 5: Teknik Responsive Design -->
+            <article class="materi-card">
+                <h2><i class="fas fa-mobile-alt"></i> Teknik Responsive Design</h2>
+                <p>Website dirancang untuk tampil optimal di berbagai perangkat:</p>
+                
+                <h3>Breakpoint yang Digunakan:</h3>
+                <div class="selector-cards">
+                    <div class="selector-card">
+                        <h4>Desktop</h4>
+                        <code>> 992px</code>
+                        <p>Layout 2 kolom (main + sidebar)</p>
+                    </div>
+                    
+                    <div class="selector-card">
+                        <h4>Tablet</h4>
+                        <code>768px - 992px</code>
+                        <p>Layout 1 kolom, navigasi horizontal</p>
+                    </div>
+                    
+                    <div class="selector-card">
+                        <h4>Mobile</h4>
+                        <code>< 768px</code>
+                        <p>Navigasi vertikal, font size lebih kecil</p>
+                    </div>
+                </div>
+                
+                <h3>Teknik Responsive yang Diterapkan:</h3>
+                <div class="code-example">
+                    <code>
+                        <span class="comment">/* Mobile First Approach */</span><br>
+                        <span class="tag">.container</span> {<br>
+                        &nbsp;&nbsp;<span class="attr">width</span>: <span class="value">90%</span>;<br>
+                        &nbsp;&nbsp;<span class="attr">max-width</span>: <span class="value">1200px</span>;<br>
+                        &nbsp;&nbsp;<span class="attr">margin</span>: <span class="value">0 auto</span>;<br>
+                        }<br><br>
+                        
+                        <span class="comment">/* Media Query untuk Tablet */</span><br>
+                        <span class="tag">@media</span> (<span class="attr">max-width</span>: <span class="value">992px</span>) {<br>
+                        &nbsp;&nbsp;<span class="tag">main</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="attr">grid-template-columns</span>: <span class="value">1fr</span>;<br>
+                        &nbsp;&nbsp;}<br>
+                        }<br><br>
+                        
+                        <span class="comment">/* Media Query untuk Mobile */</span><br>
+                        <span class="tag">@media</span> (<span class="attr">max-width</span>: <span class="value">768px</span>) {<br>
+                        &nbsp;&nbsp;<span class="tag">.header-content</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="attr">flex-direction</span>: <span class="value">column</span>;<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;<span class="tag">nav ul</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="attr">flex-wrap</span>: <span class="value">wrap</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="attr">justify-content</span>: <span class="value">center</span>;<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;<span class="tag">.hero h1</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="attr">font-size</span>: <span class="value">2.2rem</span>;<br>
+                        &nbsp;&nbsp;}<br>
+                        }
+                    </code>
+                </div>
+                
+                <div style="background-color: #fef7cd; padding: 1.5rem; border-radius: var(--radius); margin-top: 1.5rem;">
+                    <h4><i class="fas fa-lightbulb"></i> Tips Responsive Design:</h4>
+                    <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                        <li>Gunakan <span class="highlight">unit relatif</span> (%, rem, em) daripada px</li>
+                        <li>Gunakan <span class="highlight">max-width</span> untuk gambar dan kontainer</li>
+                        <li>Uji website di berbagai ukuran layar</li>
+                        <li>Pertimbangkan orientasi portrait dan landscape</li>
+                    </ul>
+                </div>
+            </article>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3>Elemen HTML yang Dipelajari</h3>
+                    <p>Semantik HTML5</p>
+                    <p>Elemen Multimedia</p>
+                    <p>Form dan Interaksi</p>
+                    <p>Struktur Halaman</p>
+                </div>
+                
+                <div>
+                    <h3>CSS yang Dipelajari</h3>
+                    <p>5 Macam Selektor</p>
+                    <p>Grid dan Flexbox</p>
+                    <p>Responsive Design</p>
+                    <p>Animasi dan Transisi</p>
+                </div>
+                
+                <div>
+                    <h3>Link Cepat</h3>
+                    <p><a href="TugasWeb1.html" style="color: #cbd5e1;">Beranda</a></p>
+                    <p><a href="TugasWeb1.html#basics" style="color: #cbd5e1;">Dasar-dasar AI</a></p>
+                    <p><a href="#top" style="color: #cbd5e1;">Kembali ke Atas</a></p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Ruang AI - Materi Pembuatan Website. Dibuat dengan HTML5 dan CSS3.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">Website dibuat sebagai contoh implementasi elemen HTML dan CSS dalam konteks edukasi AI.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript sederhana untuk interaktivitas halaman materi
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scroll untuk navigasi internal
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Highlight kode saat hover
+            const codeExamples = document.querySelectorAll('.code-example');
+            codeExamples.forEach(example => {
+                example.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.02)';
+                    this.style.transition = 'transform 0.3s ease';
+                });
+                
+                example.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+            
+            // Toggle info tambahan untuk tabel
+            const tableRows = document.querySelectorAll('.element-table tr');
+            tableRows.forEach((row, index) => {
+                if(index > 0) { // Skip header row
+                    row.addEventListener('click', function() {
+                        const elementName = this.cells[0].textContent;
+                        alert(`Elemen ${elementName}: ${this.cells[1].textContent}`);
+                    });
+                }
+            });
+            
+            // Console info
+            console.log('Halaman Materi Website - Analisis elemen HTML/CSS');
+            console.log('Total elemen semantik HTML yang dibahas: 8');
+            console.log('Total selektor CSS yang dibahas: 5');
+        });
+    </script>
+</body>
+</html>
