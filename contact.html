@@ -88,21 +88,16 @@
             transition: var(--transition);
         }
 
-        nav a:hover, nav a.active {
-            background-color: var(--primary);
-            color: white;
-        }
-
         /* Hero Section */
         .hero {
             background: var(--dark);
             color: white;
             padding: 4rem 0;
             margin-bottom: 3rem;
+            text-align: center;
         }
 
         .hero-content {
-            text-align: center;
             max-width: 800px;
             margin: 0 auto;
         }
@@ -227,7 +222,7 @@
         }
 
         .contact-item i {
-            color: var(--primary);
+            color: var(--dark);
             font-size: 1.5rem;
             width: 40px;
             height: 40px;
@@ -247,21 +242,21 @@
             color: var(--gray);
         }
 
-        /* Peta Lokasi */
-        .map-container {
-            margin-top: 3rem;
-        }
-
-        .map-placeholder {
+        /* Map Embed Styling */
+        .map-embed {
             width: 100%;
-            height: 300px;
-            background-color: var(--light-gray);
+            height: 400px;
             border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray);
-            font-weight: 500;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--light-gray);
+        }
+        
+        .map-embed iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         /* Sosial Media */
@@ -368,6 +363,10 @@
             .hero h1 {
                 font-size: 2rem;
             }
+            
+            .map-embed {
+                height: 300px;
+            }
         }
         
         /* Animasi */
@@ -379,6 +378,20 @@
         .contact-card {
             animation: fadeIn 0.5s ease;
         }
+
+        /* Disclaimer Box */
+        .disclaimer {
+            background-color: #fef7cd;
+            border-left: 4px solid #f59e0b;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            margin-bottom: 2rem;
+        }
+
+        .disclaimer h4 {
+            color: #b45309;
+            margin-bottom: 0.5rem;
+        }
     </style>
 </head>
 <body>
@@ -386,7 +399,7 @@
     <header>
         <div class="container header-content">
             <a href="index.html" class="logo">
-                <img src="logo.png" width="100" height="60" alt="Logo Ruang AI" />
+                <img src="logo.png" width="100" height="60" alt="Logo EduBot AI" />
                 <span>EduBot AI</span>
             </a>
             
@@ -404,21 +417,33 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container hero-content">
-            <h1>Hubungi Kami</h1>
-            <p>Punya pertanyaan tentang AI, chatbot, atau ingin berkolaborasi? Tim kami siap membantu Anda.</p>
+            <h1>Hubungi Pengembang</h1>
+            <p>Website ini dibuat sebagai tugas mata kuliah Pemrograman Berbasis Web. Silakan hubungi untuk informasi lebih lanjut.</p>
         </div>
     </section>
 
     <!-- Konten Utama -->
     <div class="container">
+        <div class="disclaimer">
+            <h4><i class="fas fa-info-circle"></i> Informasi Penting</h4>
+            <p>Website ini merupakan proyek tugas kuliah untuk mata kuliah <strong>Pemrograman Berbasis Web</strong>. Form kontak di bawah ini hanya untuk simulasi dan tidak benar-benar mengirimkan data ke server. Data yang dikirim akan ditampilkan di console browser.</p>
+        </div>
+
         <div class="contact-section">
             <!-- Form Kontak -->
             <div class="contact-card">
-                <h2><i class="fas fa-envelope"></i> Kirim Pesan</h2>
+                <h2><i class="fas fa-comment-alt"></i> Kirim Pesan Simulasi</h2>
+                <p style="margin-bottom: 1.5rem; color: var(--gray);">Form ini hanya untuk demonstrasi kemampuan JavaScript. Data tidak dikirim ke server.</p>
+                
                 <form class="contact-form" id="contactForm">
                     <div class="form-group">
                         <label for="name">Nama Lengkap</label>
                         <input type="text" id="name" name="name" required placeholder="Masukkan nama Anda">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="nim">NIM</label>
+                        <input type="text" id="nim" name="nim" placeholder="Masukkan NIM (opsional)">
                     </div>
                     
                     <div class="form-group">
@@ -427,14 +452,13 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="subject">Subjek</label>
+                        <label for="subject">Jenis Pesan</label>
                         <select id="subject" name="subject" required>
-                            <option value="" disabled selected>Pilih subjek pesan</option>
-                            <option value="general">Pertanyaan Umum</option>
-                            <option value="collaboration">Kolaborasi</option>
-                            <option value="technical">Dukungan Teknis</option>
-                            <option value="feedback">Feedback & Saran</option>
-                            <option value="other">Lainnya</option>
+                            <option value="" disabled selected>Pilih jenis pesan</option>
+                            <option value="tanya">Tanya tentang proyek</option>
+                            <option value="saran">Saran untuk pengembangan</option>
+                            <option value="bug">Laporkan bug/error</option>
+                            <option value="lainnya">Lainnya</option>
                         </select>
                     </div>
                     
@@ -444,30 +468,53 @@
                     </div>
                     
                     <button type="submit" class="btn btn-block">
-                        <i class="fas fa-paper-plane"></i> Kirim Pesan
+                        <i class="fas fa-paper-plane"></i> Kirim Pesan (Simulasi)
                     </button>
                 </form>
+
+                <div id="formResponse" style="margin-top: 1.5rem; padding: 1rem; background-color: #f0f9ff; border-radius: 8px; display: none;">
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;"><i class="fas fa-check-circle"></i> Pesan Terkirim (Simulasi)</h4>
+                    <p id="responseMessage"></p>
+                </div>
             </div>
 
             <!-- Informasi Kontak -->
             <div class="contact-card">
-                <h2><i class="fas fa-address-book"></i> Informasi Kontak</h2>
+                <h2><i class="fas fa-user-circle"></i> Informasi Pengembang</h2>
                 
                 <div class="contact-info">
                     <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
+                        <i class="fas fa-user-graduate"></i>
                         <div>
-                            <h4>Alamat Kantor</h4>
-                            <p>Parung Panjang<br>Kabupaten Bogor, 16360<br>Indonesia</p>
+                            <h4>Nama Mahasiswa</h4>
+                            <p>Azhar Prabu Bagaskara</p>
+                            <p style="font-size: 0.9rem;">Pengembang Website EduBot AI</p>
                         </div>
                     </div>
                     
                     <div class="contact-item">
-                        <i class="fas fa-phone"></i>
+                        <i class="fas fa-id-card"></i>
                         <div>
-                            <h4>Telepon</h4>
-                            <p>+62 821 1430 0082</p>
-                            <p>Senin - Jumat, 09:00 - 17:00 WIB</p>
+                            <h4>NIM</h4>
+                            <p>230101010113</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-university"></i>
+                        <div>
+                            <h4>Program Studi</h4>
+                            <p>Sistem Informasi</p>
+                            <p>Universitas Siber Asia</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-book"></i>
+                        <div>
+                            <h4>Mata Kuliah</h4>
+                            <p>Pemrograman Berbasis Web</p>
+                            <p>Semester 5 - Tahun Akademik 2025/2026</p>
                         </div>
                     </div>
                     
@@ -475,92 +522,132 @@
                         <i class="fas fa-envelope"></i>
                         <div>
                             <h4>Email</h4>
-                            <p>info@edubot.com</p>
-                            <p>support@edubot.com</p>
+                            <p>azharprabu3107@gmail.com</p>
+                            <p style="font-size: 0.9rem;">Untuk keperluan akademik</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Sosial Media -->
-                <div class="social-links">
-                    <a href="#" class="social-link" title="Facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="social-link" title="Twitter">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="social-link" title="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="social-link" title="LinkedIn">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a href="#" class="social-link" title="YouTube">
-                        <i class="fab fa-youtube"></i>
-                    </a>
+                <div style="margin-top: 2rem;">
+                    <h4 style="margin-bottom: 1rem; color: var(--dark);">Portofolio & Media Akademik</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link" title="GitHub" onclick="alert('Link GitHub: github.com/username'); return false;">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="social-link" title="LinkedIn" onclick="alert('Link LinkedIn: linkedin.com/in/username'); return false;">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Google Scholar" onclick="alert('Link Google Scholar: scholar.google.com'); return false;">
+                            <i class="fas fa-graduation-cap"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Portofolio" onclick="alert('Link Portofolio: username.github.io'); return false;">
+                            <i class="fas fa-briefcase"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Peta Lokasi -->
-        <div class="map-container">
-            <div class="contact-card">
-                <h2><i class="fas fa-map"></i> Lokasi Kami</h2>
-                <div class="map-placeholder">
-                    <i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i>
-                    Peta Lokasi Kantor EduBot AI
-                </div>
-                <p style="margin-top: 1rem; color: var(--gray); text-align: center;">
-                    *Peta menunjukkan lokasi kantor kami di Jakarta
-                </p>
-            </div>
-        </div>
-
-        <!-- FAQ Section -->
+        <!-- FAQ Section - Diubah menjadi seputar tugas -->
         <div class="faq-section">
             <div class="contact-card">
-                <h2><i class="fas fa-question-circle"></i> Pertanyaan yang Sering Diajukan</h2>
+                <h2><i class="fas fa-question-circle"></i> Pertanyaan Umum tentang Proyek</h2>
                 
                 <div class="faq-list">
                     <div class="faq-item">
                         <div class="faq-question">
-                            <h4>Bagaimana cara bergabung dengan komunitas EduBot AI?</h4>
+                            <h4>Apakah website ini menggunakan backend/server?</h4>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Anda dapat bergabung dengan komunitas kami melalui grup Telegram atau forum diskusi online. Kunjungi halaman komunitas untuk informasi lebih lanjut.</p>
+                            <p>Tidak, website ini adalah <strong>static website</strong> yang hanya menggunakan HTML, CSS, dan JavaScript di sisi klien. Semua interaksi dilakukan di browser tanpa perlu server backend.</p>
                         </div>
                     </div>
                     
                     <div class="faq-item">
                         <div class="faq-question">
-                            <h4>Apakah ada program pelatihan AI untuk pemula?</h4>
+                            <h4>Bagaimana cara kerja form kontak jika tidak ada server?</h4>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Ya, kami menyelenggarakan workshop dan webinar rutin untuk pemula. Semua informasi tentang pelatihan dapat ditemukan di bagian "Materi" website kami.</p>
+                            <p>Form kontak menggunakan JavaScript untuk memvalidasi dan menampilkan data yang diinput. Data ditampilkan di console browser dan alert box sebagai simulasi. Tidak ada data yang benar-benar dikirim ke server.</p>
                         </div>
                     </div>
                     
                     <div class="faq-item">
                         <div class="faq-question">
-                            <h4>Berapa lama waktu respons untuk pertanyaan teknis?</h4>
+                            <h4>Teknologi apa saja yang digunakan dalam website ini?</h4>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Tim dukungan teknis kami biasanya merespons dalam 24-48 jam kerja. Untuk masalah mendesak, silakan hubungi nomor telepon yang tersedia.</p>
+                            <p>Website ini dibangun menggunakan:
+                            <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                                <li><strong>HTML5</strong> untuk struktur semantik</li>
+                                <li><strong>CSS3</strong> untuk styling dan responsive design</li>
+                                <li><strong>JavaScript</strong> untuk interaktivitas</li>
+                                <li><strong>Font Awesome</strong> untuk ikon</li>
+                                <li><strong>Google Fonts</strong> untuk tipografi</li>
+                            </ul>
+                            </p>
                         </div>
                     </div>
                     
                     <div class="faq-item">
                         <div class="faq-question">
-                            <h4>Apakah Edubot AI menyediakan konsultasi untuk bisnis?</h4>
+                            <h4>Berapa lama waktu pengembangan website ini?</h4>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Ya, kami menawarkan layanan konsultasi implementasi AI untuk bisnis. Silakan kirim detail kebutuhan Anda melalui formulir kontak.</p>
+                            <p>Website ini dikembangkan selama ±5 minggu sebagai tugas akhir mata kuliah Pemrograman Berbasis Web. Proses meliputi perencanaan, desain, pengkodean, testing, dan dokumentasi.</p>
                         </div>
                     </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>Apakah website ini responsif untuk mobile?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Ya, website ini menggunakan <strong>responsive design</strong> dengan media queries CSS. Tampilan akan menyesuaikan dengan baik di desktop, tablet, dan smartphone.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Peta Lokasi Kampus -->
+        <div class="map-container">
+            <div class="contact-card">
+                <h2><i class="fas fa-map-marked-alt"></i> Lokasi Kampus</h2>
+                <p style="margin-bottom: 1rem; color: var(--gray);">Lokasi Universitas Siber Asia (UNSIA) tempat perkuliahan Pemrograman Berbasis Web dilaksanakan.</p>
+                
+                <!-- Peta Google Maps Embed -->
+                <div class="map-embed">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.7354987670046!2d106.8180127741837!3d-6.298446561641942!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ed1aea2566fd%3A0xa43a768fbbbd72af!2sUniversitas%20Siber%20Asia%20(UNSIA)!5e0!3m2!1sen!2sid!4v1768726461443!5m2!1sen!2sid" 
+                        width="100%" 
+                        height="400" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Lokasi Universitas Siber Asia (UNSIA)">
+                    </iframe>
+                </div>
+                
+                <div style="margin-top: 1rem; text-align: center;">
+                    <a href="https://maps.google.com/?q=Universitas+Siber+Asia+(UNSIA)" target="_blank" class="btn" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-external-link-alt"></i> Buka di Google Maps
+                    </a>
+                </div>
+                
+                <div style="margin-top: 1.5rem; padding: 1rem; background-color: #f8fafc; border-radius: var(--radius);">
+                    <h4 style="margin-bottom: 0.5rem; color: var(--dark);">Informasi Kampus</h4>
+                    <p><strong>Universitas:</strong> Universitas Siber Asia (UNSIA)</p>
+                    <p><strong>Alamat:</strong> Jl. Harsono RM No.1 RT09/04, RT.9/RW.4, Jakarta 12550, Jakarta Selatan, Jakarta, Indonesia</p>
+                    <p><strong>Telepon:</strong> (+6221) 27806189</p>
+                    <p><strong>Website:</strong> <a href="https://unsia.ac.id" target="_blank" style="color: var(--primary);">www.unsia.ac.id</a></p>
                 </div>
             </div>
         </div>
@@ -571,32 +658,30 @@
         <div class="container">
             <div class="footer-content">
                 <div>
+                    <h3>Tentang Proyek</h3>
+                    <p>Website EduBot AI adalah proyek tugas mata kuliah Pemrograman Berbasis Web. Bertujuan untuk mengimplementasikan HTML, CSS, dan JavaScript dalam pembuatan website edukasi tentang AI.</p>
+                </div>
+                
+                <div>
                     <h3>Navigasi Cepat</h3>
                     <p><a href="index.html" style="color: #cbd5e1;">Beranda</a></p>
                     <p><a href="materi.html" style="color: #cbd5e1;">Materi Website</a></p>
-                    <p><a href="about.html" style="color: #cbd5e1;">Tentang Kami</a></p>
-                    <p><a href="contact.html" style="color: #cbd5e1;">Hubungi Kami</a></p>
+                    <p><a href="about.html" style="color: #cbd5e1;">Tentang Proyek</a></p>
+                    <p><a href="contact.html" style="color: #cbd5e1;">Kontak Pengembang</a></p>
                 </div>
                 
                 <div>
-                    <h3>Layanan</h3>
-                    <p>Pembelajaran AI</p>
-                    <p>Pembelajaran HTML & CSS</p>
-                    <p>Pengembangan Chatbot</p>
-                    <p>Pengembangan Website HTML</p>
-                </div>
-                
-                <div>
-                    <h3>Kontak</h3>
-                    <p><i class="fas fa-envelope" style="margin-right: 8px;"></i> info@edubot.com</p>
-                    <p><i class="fas fa-phone" style="margin-right: 8px;"></i> +62 21 1234 5678</p>
-                    <p><i class="fas fa-map-marker-alt" style="margin-right: 8px;"></i> Jakarta, Indonesia</p>
+                    <h3>Informasi Akademik</h3>
+                    <p><i class="fas fa-user-graduate" style="margin-right: 8px;"></i> Azhar Prabu Bagaskara</p>
+                    <p><i class="fas fa-id-card" style="margin-right: 8px;"></i> NIM: 230101010113</p>
+                    <p><i class="fas fa-university" style="margin-right: 8px;"></i> Universitas Siber Asia</p>
+                    <p><i class="fas fa-book" style="margin-right: 8px;"></i> Pemrograman Berbasis Web - Semester 5</p>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>&copy; 2025 EduBot AI - Website Media Edukasi AI dan HTML. Semua hak dilindungi.</p>
-                <p style="margin-top: 0.5rem; font-size: 0.8rem;">| Tema: Artificial Intelligence |</p>
+                <p>&copy; 2025 EduBot AI - Proyek Tugas Pemrograman Berbasis Web. Dibuat untuk tujuan edukasi.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">| Mata Kuliah: Pemrograman Berbasis Web | Semester: 5 | Tahun: 2025 |</p>
             </div>
         </div>
     </footer>
@@ -604,8 +689,11 @@
     <script>
         // JavaScript untuk form kontak
         document.addEventListener('DOMContentLoaded', function() {
-            // Form submission
+            // Form submission (simulasi)
             const contactForm = document.getElementById('contactForm');
+            const formResponse = document.getElementById('formResponse');
+            const responseMessage = document.getElementById('responseMessage');
+            
             if (contactForm) {
                 contactForm.addEventListener('submit', function(e) {
                     e.preventDefault();
@@ -613,13 +701,54 @@
                     // Ambil data form
                     const formData = new FormData(this);
                     const name = formData.get('name');
+                    const nim = formData.get('nim');
                     const email = formData.get('email');
+                    const subject = formData.get('subject');
+                    const message = formData.get('message');
                     
-                    // Simulasi pengiriman
-                    alert(`Terima kasih ${name}! Pesan Anda telah dikirim. Kami akan membalas ke ${email} dalam 1-2 hari kerja.`);
+                    // Validasi sederhana
+                    if (!name || !email || !message) {
+                        alert('Harap lengkapi semua field yang wajib diisi!');
+                        return;
+                    }
+                    
+                    // Tampilkan pesan respons
+                    const subjectText = {
+                        'tanya': 'Tanya tentang proyek',
+                        'saran': 'Saran untuk pengembangan',
+                        'bug': 'Laporkan bug/error',
+                        'lainnya': 'Lainnya'
+                    }[subject] || subject;
+                    
+                    responseMessage.innerHTML = `
+                        <p><strong>Terima kasih ${name}!</strong></p>
+                        <p>Pesan Anda dengan subjek "${subjectText}" telah diterima (simulasi).</p>
+                        <p>Data yang dikirim:</p>
+                        <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                            <li><strong>Nama:</strong> ${name}</li>
+                            ${nim ? `<li><strong>NIM:</strong> ${nim}</li>` : ''}
+                            <li><strong>Email:</strong> ${email}</li>
+                            <li><strong>Jenis Pesan:</strong> ${subjectText}</li>
+                        </ul>
+                        <p style="margin-top: 1rem; font-style: italic;">Catatan: Ini hanya simulasi. Data tidak benar-benar dikirim ke server.</p>
+                    `;
+                    
+                    formResponse.style.display = 'block';
+                    
+                    // Tampilkan data di console (untuk debugging/demonstrasi)
+                    console.log('=== DATA FORM KONTAK (SIMULASI) ===');
+                    console.log('Nama:', name);
+                    if (nim) console.log('NIM:', nim);
+                    console.log('Email:', email);
+                    console.log('Subject:', subjectText);
+                    console.log('Pesan:', message);
+                    console.log('====================================');
                     
                     // Reset form
                     this.reset();
+                    
+                    // Scroll ke respons
+                    formResponse.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 });
             }
             
@@ -679,6 +808,15 @@
                     }
                 });
             });
+
+            // Demo console log
+            console.log('=== WEBSITE EDUCATIF AI ===');
+            console.log('Nama: EduBot AI');
+            console.log('Tujuan: Tugas Mata Kuliah Pemrograman Berbasis Web');
+            console.log('Fitur: HTML5 Semantik, CSS3 Responsive, JavaScript Interaktif');
+            console.log('Pengembang: Azhar Prabu Bagaskara');
+            console.log('Universitas: Universitas Siber Asia');
+            console.log('===========================');
         });
     </script>
 </body>
