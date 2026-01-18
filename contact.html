@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak - EduBot AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS sama dengan index.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #1d4ed8;
+            --secondary: #8b5cf6;
+            --accent: #10b981;
+            --accent-dark: #059669;
+            --dark: #000000;
+            --light: #f0f8ff;
+            --gray: #64748b;
+            --light-gray: #e8ebe6;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background-color: var(--light-gray);
+        }
+
+        /* Header dan Navigasi */
+        header {
+            background-color: var(--dark);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--light-gray);
+            text-decoration: none;
+        }
+        
+        .logo i {
+            font-size: 1.8rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Konten Utama */
+        .contact-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .contact-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Card */
+        .contact-card {
+            background-color: white;
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .contact-card h2 {
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 3px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Form Kontak */
+        .contact-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus,
+        .contact-form select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Tombol */
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-block {
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Informasi Kontak */
+        .contact-info {
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .contact-item i {
+            color: var(--primary);
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(59, 130, 246, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-item h4 {
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-item p {
+            color: var(--gray);
+        }
+
+        /* Peta Lokasi */
+        .map-container {
+            margin-top: 3rem;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 300px;
+            background-color: var(--light-gray);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        /* Sosial Media */
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-top: 4rem;
+        }
+
+        .faq-item {
+            background-color: white;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question h4 {
+            color: var(--dark);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            margin-top: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Animasi */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .contact-card {
+            animation: fadeIn 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header dan Navigasi -->
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <img src="logo.png" width="100" height="60" alt="Logo Ruang AI" />
+                <span>EduBot AI</span>
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="materi.html">Materi Website</a></li>
+                    <li><a href="about.html">Tentang</a></li>
+                    <li><a href="contact.html" class="active">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Hubungi Kami</h1>
+            <p>Punya pertanyaan tentang AI, chatbot, atau ingin berkolaborasi? Tim kami siap membantu Anda.</p>
+        </div>
+    </section>
+
+    <!-- Konten Utama -->
+    <div class="container">
+        <div class="contact-section">
+            <!-- Form Kontak -->
+            <div class="contact-card">
+                <h2><i class="fas fa-envelope"></i> Kirim Pesan</h2>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input type="text" id="name" name="name" required placeholder="Masukkan nama Anda">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="nama@contoh.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subjek</label>
+                        <select id="subject" name="subject" required>
+                            <option value="" disabled selected>Pilih subjek pesan</option>
+                            <option value="general">Pertanyaan Umum</option>
+                            <option value="collaboration">Kolaborasi</option>
+                            <option value="technical">Dukungan Teknis</option>
+                            <option value="feedback">Feedback & Saran</option>
+                            <option value="other">Lainnya</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Pesan</label>
+                        <textarea id="message" name="message" rows="5" required placeholder="Tulis pesan Anda di sini..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-block">
+                        <i class="fas fa-paper-plane"></i> Kirim Pesan
+                    </button>
+                </form>
+            </div>
+
+            <!-- Informasi Kontak -->
+            <div class="contact-card">
+                <h2><i class="fas fa-address-book"></i> Informasi Kontak</h2>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Alamat Kantor</h4>
+                            <p>Parung Panjang<br>Kabupaten Bogor, 16360<br>Indonesia</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Telepon</h4>
+                            <p>+62 821 1430 0082</p>
+                            <p>Senin - Jumat, 09:00 - 17:00 WIB</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@edubot.com</p>
+                            <p>support@edubot.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sosial Media -->
+                <div class="social-links">
+                    <a href="#" class="social-link" title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link" title="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="social-link" title="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Peta Lokasi -->
+        <div class="map-container">
+            <div class="contact-card">
+                <h2><i class="fas fa-map"></i> Lokasi Kami</h2>
+                <div class="map-placeholder">
+                    <i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i>
+                    Peta Lokasi Kantor EduBot AI
+                </div>
+                <p style="margin-top: 1rem; color: var(--gray); text-align: center;">
+                    *Peta menunjukkan lokasi kantor kami di Jakarta
+                </p>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <div class="contact-card">
+                <h2><i class="fas fa-question-circle"></i> Pertanyaan yang Sering Diajukan</h2>
+                
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>Bagaimana cara bergabung dengan komunitas EduBot AI?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Anda dapat bergabung dengan komunitas kami melalui grup Telegram atau forum diskusi online. Kunjungi halaman komunitas untuk informasi lebih lanjut.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>Apakah ada program pelatihan AI untuk pemula?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Ya, kami menyelenggarakan workshop dan webinar rutin untuk pemula. Semua informasi tentang pelatihan dapat ditemukan di bagian "Materi" website kami.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>Berapa lama waktu respons untuk pertanyaan teknis?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Tim dukungan teknis kami biasanya merespons dalam 24-48 jam kerja. Untuk masalah mendesak, silakan hubungi nomor telepon yang tersedia.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>Apakah Edubot AI menyediakan konsultasi untuk bisnis?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Ya, kami menawarkan layanan konsultasi implementasi AI untuk bisnis. Silakan kirim detail kebutuhan Anda melalui formulir kontak.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3>Navigasi Cepat</h3>
+                    <p><a href="index.html" style="color: #cbd5e1;">Beranda</a></p>
+                    <p><a href="materi.html" style="color: #cbd5e1;">Materi Website</a></p>
+                    <p><a href="about.html" style="color: #cbd5e1;">Tentang Kami</a></p>
+                    <p><a href="contact.html" style="color: #cbd5e1;">Hubungi Kami</a></p>
+                </div>
+                
+                <div>
+                    <h3>Layanan</h3>
+                    <p>Pembelajaran AI</p>
+                    <p>Pembelajaran HTML & CSS</p>
+                    <p>Pengembangan Chatbot</p>
+                    <p>Pengembangan Website HTML</p>
+                </div>
+                
+                <div>
+                    <h3>Kontak</h3>
+                    <p><i class="fas fa-envelope" style="margin-right: 8px;"></i> info@edubot.com</p>
+                    <p><i class="fas fa-phone" style="margin-right: 8px;"></i> +62 21 1234 5678</p>
+                    <p><i class="fas fa-map-marker-alt" style="margin-right: 8px;"></i> Jakarta, Indonesia</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 EduBot AI - Website Media Edukasi AI dan HTML. Semua hak dilindungi.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">| Tema: Artificial Intelligence |</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript untuk form kontak
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Ambil data form
+                    const formData = new FormData(this);
+                    const name = formData.get('name');
+                    const email = formData.get('email');
+                    
+                    // Simulasi pengiriman
+                    alert(`Terima kasih ${name}! Pesan Anda telah dikirim. Kami akan membalas ke ${email} dalam 1-2 hari kerja.`);
+                    
+                    // Reset form
+                    this.reset();
+                });
+            }
+            
+            // FAQ toggle
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const icon = question.querySelector('i');
+                
+                question.addEventListener('click', () => {
+                    // Tutup semua FAQ lainnya
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                            otherItem.querySelector('i').classList.remove('fa-chevron-up');
+                            otherItem.querySelector('i').classList.add('fa-chevron-down');
+                        }
+                    });
+                    
+                    // Toggle FAQ saat ini
+                    item.classList.toggle('active');
+                    if (item.classList.contains('active')) {
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    } else {
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                });
+            });
+            
+            // Update navigasi aktif
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('nav a');
+            
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('href');
+                if (linkPage === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Smooth scroll untuk link anchor
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
